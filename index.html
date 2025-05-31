@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - Biblioteca</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Login</h1>
+  <form id="formLogin">
+    <input type="text" id="nomeLogin" placeholder="Nome de usuário" required>
+    <input type="password" id="senhaLogin" placeholder="Senha" required>
+    <button type="submit">Entrar</button>
+  </form>
+  <a href="cadastro.html">Cadastrar</a>
+
+  <script>
+    document.getElementById("formLogin").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const nome = document.getElementById("nomeLogin").value.trim();
+      const senha = document.getElementById("senhaLogin").value.trim();
+
+      if (!nome || !senha) {
+        alert("Preencha todos os campos.");
+        return;
+      }
+
+      const usuarios = JSON.parse(localStorage.getItem("usuarios") || "[]");
+      const usuario = usuarios.find(u => u.nome === nome && u.senha === senha);
+
+      if (!usuario) {
+        alert("Usuário ou senha inválidos.");
+        return;
+      }
+
+      localStorage.setItem("usuarioLogado", nome);
+      window.location.href = "dashboard.html";
+    });
+  </script>
+</body>
+</html>

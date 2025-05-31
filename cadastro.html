@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cadastro</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2>Cadastro de Usuário</h2>
+  <form id="formCadastro">
+    <input type="text" id="nome" placeholder="Nome de usuário" required>
+    <input type="password" id="senha" placeholder="Senha" required>
+    <button type="submit">Cadastrar</button>
+  </form>
+  <a href="index.html">Voltar ao login</a>
+
+  <script>
+    document.getElementById("formCadastro").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const nome = document.getElementById("nome").value.trim();
+      const senha = document.getElementById("senha").value.trim();
+
+      if (!nome || !senha) {
+        alert("Preencha todos os campos.");
+        return;
+      }
+
+      let usuarios = JSON.parse(localStorage.getItem("usuarios") || "[]");
+
+      if (usuarios.find(u => u.nome === nome)) {
+        alert("Usuário já existe.");
+        return;
+      }
+
+      usuarios.push({ nome, senha, livros: [] });
+      localStorage.setItem("usuarios", JSON.stringify(usuarios));
+
+      alert("Cadastro realizado com sucesso!");
+      window.location.href = "index.html";
+    });
+  </script>
+</body>
+</html>

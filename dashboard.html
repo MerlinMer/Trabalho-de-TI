@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Minha Biblioteca</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Bem-vindo(a), <span id="nomeUsuario"></span>!</h1>
+
+  <h2>Adicionar Livro</h2>
+  <form id="formLivro" onsubmit="event.preventDefault(); adicionarLivro();">
+    <input type="text" id="titulo" placeholder="Título" required>
+    <input type="text" id="autor" placeholder="Autor" required>
+    <select id="status">
+      <option value="quero ler">Quero ler</option>
+      <option value="lendo">Lendo</option>
+      <option value="lido">Lido</option>
+    </select>
+    <button type="submit">Adicionar</button>
+  </form>
+
+  <h2>Meus Livros</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Título</th>
+        <th>Autor</th>
+        <th>Status</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody id="listaLivros"></tbody>
+  </table>
+
+  <script src="script.js"></script>
+  <div class="logout-container">
+  <button onclick="logout()" class="logout-button">Sair</button>
+</div>
+</body>
+</html>
